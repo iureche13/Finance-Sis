@@ -3,7 +3,7 @@ from chatbot import PurdueChatbot  # if you split files
 
 app = Flask(__name__)
 
-chatbot = PurdueChatbot(api_key="sk-a468e1d3f0154d698c0f49f85cb786c0")
+chatbot = PurdueChatbot(api_key="")
 
 # Mock UI route
 @app.route("/")
