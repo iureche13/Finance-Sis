@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app)
 
 chatbot = RiskAssessmentChatbot(
-    api_key="sk-ced2218389c048d8b8878325a8c1f5a2",
+    api_key="",
     risk_data_path="risk_data.json"
 )
 
