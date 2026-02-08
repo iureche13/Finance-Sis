@@ -1,6 +1,37 @@
 import json
 from NLPProcessing import calculate_score, keyword_score
 from CheckIdentity import calculate_risk_score, name_in_email
+from flask import Flask, request, jsonify
+import os
+
+app = Flask(__name__)
+
+@app.route("/submit", methods=["POST"])
+def submit():
+    data = request.get_json()
+
+    name = data.get("name", "")
+    email = data.get("email", "")
+    message = data.get("message", "")
+
+    if not message.strip():
+        return jsonify({"error": "Message required"}), 400
+
+    # File in same directory as Final.py
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, "submissions.txt")
+
+    with open(file_path, "a", encoding="utf-8") as f:
+        f.write(name + "\n")
+        f.write(email + "\n")
+        f.write(message + "\n")
+        f.write("-----\n")
+
+    return jsonify({"success": True})
+
+if __name__ == "__main__":
+    app.run(port=5000, debug=True)
+
 
 def save_results_to_json(risk_score, risk_level, flags, concerning_area, email_concerns, summary, filename):
     data = {
