@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purdue GenAI Chatbot</title>
+    <script>
+        async function sendMessage() {
+            const msg = document.getElementById("message").value;
+            const res = await fetch("/chat", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({message: msg})
+            });
+            const data = await res.json();
+            document.getElementById("response").innerText = data.reply;
+        }
+    </script>
+</head>
+<body>
+    <h1>Purdue GenAI Chatbot</h1>
+    <input id="message" type="text" placeholder="Type your message">
+    <button onclick="sendMessage()">Send</button>
+    <pre id="response"></pre>
+</body>
+</html>
