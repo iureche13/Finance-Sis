@@ -1,6 +1,6 @@
-# Financial Risk Chatbot Demo
+# Finance-Sis Scam Detector
 
-This is a simple Flask-based chatbot web application for a hackathon demo. It assesses financial risk based on provided inputs and offers tailored advice.
+This is a chatbot web application for a hackathon tailored towards young women, especially college students (such as at Purdue!). It assesses financial risk based on provided inputs and offers tailored advice to detect whether the financial offer is a scam. We want to encourage financial safety for women especially because they have historically lower financial literacy awareness than men.
 
 ## Features
 
