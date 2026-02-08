@@ -1,0 +1,11 @@
+{
+  "risk_score": 72,
+  "risk_level": "High",
+  "summary": "The message urges immediate payment and impersonates a trusted institution.",
+  "scam_type": "Impersonation Scam",
+  "top_flags": [
+    "Urgency and pressure tactics",
+    "Request for immediate payment",
+    "Suspicious sender address"
+  ]
+}
