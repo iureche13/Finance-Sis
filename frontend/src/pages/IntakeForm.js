@@ -6,7 +6,7 @@ function IntakeForm() {
   return (
     <div>
       <h1>Intake Form</h1>
-      <button onClick={() => navigate("/homepage")}>
+      <button onClick={() => navigate("/results")}>
         Submit Form
       </button>
     </div>
