@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import IntakeForm from "./pages/IntakeForm";
+import IntakeForm from "./pages/FrontPage/IntakeForm";
 import ResultsPage from "./pages/ResultsPage/ResultsPage";
 
 function App() {

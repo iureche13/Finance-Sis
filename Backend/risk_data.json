@@ -1,8 +1,14 @@
 {
-   "risk_score": 72,
-   "risk_level": "High",
-   "flags" : [],
-   "concerning_area" : "",
-   "email_concerns" : [],
-   "summary" : "The message urges immediate payment and impersonates a trusted institution."
+    "risk_score": 92,
+    "risk_level": "high",
+    "flags": [
+        "great wealth"
+    ],
+    "concerning_area": "guarantee",
+    "email_concerns": [
+        "free domain",
+        "doesn't match first name",
+        "doesn't match last name"
+    ],
+    "summary": "This message has a risk score of 92, which is considered to be high. Some concerning phrases, including \"great wealth\" raise cause for suspicion. There are concerning aspects of the email address, including free domain, doesn't match first name and doesn't match last name"
 }

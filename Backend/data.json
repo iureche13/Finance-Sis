@@ -1,0 +1,12 @@
+{
+    "risk_score": 92,
+    "risk_level": "high",
+    "flags": [],
+    "concerning_area": "payment",
+    "email_concerns": [
+        "free domain",
+        "doesn't match first name",
+        "doesn't match last name"
+    ],
+    "summary": "This message has a risk score of 92, which is considered to be high. There are concerning aspects of the email address, including free domain, doesn't match first name and doesn't match last name"
+}
