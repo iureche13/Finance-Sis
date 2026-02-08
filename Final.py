@@ -111,7 +111,7 @@ def get_scam_words(file):
 
 file = 'scam_words'
 search_words = get_scam_words(file)
-filename = 'data.json'
+filename = 'Backend/data.json'
 
 def run_program(name, email, message):
     message_score, concerning_area, flags = keyword_score(search_words, message)
