@@ -1,41 +1,74 @@
 import requests
+import json
 
-class PurdueChatbot:
-    def __init__(self, api_key):
-        self.api_url = "https://genai.rcac.purdue.edu/api/chat/completions"
-        self.headers = {
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json"
-        }
-        self.messages = []  # chat memory
+class RiskAssessmentChatbot:
+    def __init__(self, api_key, risk_data_path):
+        self.api_key = api_key
 
-    def ask(self, user_input):
-        self.messages.append({
-            "role": "user",
-            "content": user_input
-        })
+        with open(risk_data_path, "r") as f:
+            self.risk_data = json.load(f)
+
+        self.endpoint = "https://genai.rcac.purdue.edu/api/chat/completions"
+
+    def ask(self, user_message):
+        system_prompt = self._build_system_prompt()
 
         body = {
             "model": "llama3.1:latest",
-            "messages": self.messages,
-            "stream": False
+            "messages": [
+                {
+                    "role": "system",
+                    "content": system_prompt
+                },
+                {
+                    "role": "user",
+                    "content": user_message
+                }
+            ],
+            "stream": False,
+            "temperature": 0.4
+        }
+
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
         }
 
         response = requests.post(
-            self.api_url,
-            headers=self.headers,
-            json=body
+            self.endpoint,
+            headers=headers,
+            json=body,
+            timeout=30
         )
 
         if response.status_code != 200:
-            raise Exception(response.text)
+            raise Exception(f"Llama API error: {response.status_code}, {response.text}")
 
         data = response.json()
-        reply = data["choices"][0]["message"]["content"]
+        return data["choices"][0]["message"]["content"]
 
-        self.messages.append({
-            "role": "assistant",
-            "content": reply
-        })
+    def _build_system_prompt(self):
+        return f"""
+You are a financial risk assessment chatbot.
 
-        return reply
+You have access to a user's scam risk assessment data and must answer questions
+based on that data as well as general scam and fraud detection knowledge.
+
+USER RISK DATA:
+- Risk Score: {self.risk_data["risk_score"]} / 100
+- Risk Level: {self.risk_data["risk_level"]}
+- Scam Type: {self.risk_data["scam_type"]}
+
+SUMMARY:
+{self.risk_data["summary"]}
+
+TOP WARNING FLAGS:
+{", ".join(self.risk_data["top_flags"])}
+
+INSTRUCTIONS:
+- Explain the risk score and level when asked
+- Answer follow-up questions conversationally
+- Provide general scam prevention advice
+- Do NOT provide legal or financial advice
+- Be clear, calm, and supportive
+"""
