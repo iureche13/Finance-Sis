@@ -1,25 +1,29 @@
 from flask import Flask, request, jsonify, render_template
-from chatbot import PurdueChatbot  # if you split files
+from chatbot import RiskAssessmentChatbot
 
 app = Flask(__name__)
 
-chatbot = PurdueChatbot(api_key="")
+chatbot = RiskAssessmentChatbot(
+    api_key="",
+    risk_data_path="risk_data.json"
+)
 
-# Mock UI route
 @app.route("/")
 def index():
-    return render_template("index.html")  # This is your HTML chat UI
+    return render_template("index.html")
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    try: 
-        user_msg = request.json["message"]
+    try:
+        user_msg = request.json.get("message", "")
         print(f"Received message: {user_msg}")
+
         reply = chatbot.ask(user_msg)
         return jsonify({"reply": reply})
+
     except Exception as e:
         print(f"Error occurred: {e}")
-        return jsonify({"reply": "Internal Error"}), 500
+        return jsonify({"reply": "Internal server error"}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
