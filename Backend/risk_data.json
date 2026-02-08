@@ -1,14 +1,17 @@
 {
-    "risk_score": 92,
+    "risk_score": 82,
     "risk_level": "high",
     "flags": [
-        "great wealth"
+        "dear student",
+        "final warning",
+        "financial aid at risk",
+        "act now"
     ],
-    "concerning_area": "guarantee",
+    "concerning_area": "urgency",
     "email_concerns": [
         "free domain",
         "doesn't match first name",
         "doesn't match last name"
     ],
-    "summary": "This message has a risk score of 92, which is considered to be high. Some concerning phrases, including \"great wealth\" raise cause for suspicion. There are concerning aspects of the email address, including free domain, doesn't match first name and doesn't match last name"
+    "summary": "This message has a risk score of 82, which is considered to be high. Some concerning phrases, including \"dear student\", \"final warning\", \"financial aid at risk\" and \"act now\" raise cause for suspicion. There are concerning aspects of the email address, including free domain, doesn't match first name and doesn't match last name"
 }

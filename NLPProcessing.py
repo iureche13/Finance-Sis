@@ -6,7 +6,7 @@ def calculate_score(scores):
     for category in scores:
         if category not in ['urgency', 'guarantee', 'payment']:
             score += scores[category] # other hits
-    return max(100, (score * 10))
+    return min(100, (score * 10))
 
 def keyword_score(search_words, text):
     flags = []

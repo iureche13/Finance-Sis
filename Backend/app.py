@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify, render_template
 from chatbot import RiskAssessmentChatbot
 from flask_cors import CORS
+import json
 app = Flask(__name__)
 CORS(app)
 
 chatbot = RiskAssessmentChatbot(
-    api_key="",
+    api_key="sk-ced2218389c048d8b8878325a8c1f5a2",
     risk_data_path="risk_data.json"
 )
 
@@ -28,6 +29,8 @@ def chat():
 
 @app.route("/risk", methods=["GET"])
 def risk():
+    with open("risk_data.json", "r") as f:
+        chatbot.risk_data = json.load(f)
     return jsonify({
         "risk_score": chatbot.risk_data.get("risk_score"),
         "risk_level": chatbot.risk_data.get("risk_level"),

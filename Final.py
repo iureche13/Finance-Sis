@@ -117,11 +117,17 @@ def submit():
         risk_score, risk_level = final_score_and_status(email_score, message_score)
         summary = generate_summary(risk_score, risk_level,flags, email_concerns)
         save_results_to_json(risk_score, risk_level, flags, concerning_area, email_concerns, summary, filename)
-        return summary
-    run_program(name, email, message)
+        return {
+            "risk_score": risk_score,
+            "risk_level":risk_level,
+            "summary": summary
+        }
+    result = run_program(name, email, message)
 
-    #return jsonify(result)
-    return jsonify({"success": True})
+    return jsonify(result)
+    #return jsonify({"success": True})
+
+    
 
 if __name__ == "__main__":
     app.run(port=5001, debug=True)

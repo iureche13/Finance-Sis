@@ -4,6 +4,7 @@ import MessageInput from "./MessageInput";
 import RiskCircle from "./RiskCircle";
 
 function ResultsPage() {
+  document.body.style.backgroundColor = "#e2cbe8";
   const [messages, setMessages] = useState([
     { role: "assistant", content: "Hi! I’m your risk assessment assistant." }
   ]);
@@ -17,6 +18,7 @@ function ResultsPage() {
     fetch("http://localhost:5000/risk")
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         setRiskScore(data.risk_score);
         setRiskLevel(data.risk_level);
         setSummary(data.summary || ""); // <- Step 3: set summary
@@ -35,6 +37,8 @@ function ResultsPage() {
       });
 
       const data = await response.json();
+      console.log("here");
+      console.log(data);
       setMessages(prev => [...prev, { role: "assistant", content: data.reply }]);
       
       if (data.risk_score) setRiskScore(data.risk_score);
