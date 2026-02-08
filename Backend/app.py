@@ -5,7 +5,7 @@ app = Flask(__name__)
 CORS(app)
 
 chatbot = RiskAssessmentChatbot(
-    api_key="sk-7ddf9d6847c64592899d039af9a6eef3",
+    api_key="",
     risk_data_path="risk_data.json"
 )
 
@@ -25,6 +25,17 @@ def chat():
     except Exception as e:
         print(f"Error occurred: {e}")
         return jsonify({"reply": "Internal server error"}), 500
+
+@app.route("/risk", methods=["GET"])
+def risk():
+    return jsonify({
+        "risk_score": chatbot.risk_data.get("risk_score"),
+        "risk_level": chatbot.risk_data.get("risk_level"),
+        "summary": chatbot.risk_data.get("summary", "")
+    })
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
