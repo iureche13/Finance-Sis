@@ -32,3 +32,6 @@ for img in article.find_all("img", alt="small red flag"):
 for i, flag in enumerate(red_flags, 1):
     print(f"{i}. {flag}")
 
+
+heer is new codeeeee
+"neme" = new
